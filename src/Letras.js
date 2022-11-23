@@ -1,3 +1,6 @@
+import { useState } from "react";
+import { LockedLetter, UnlockedLetter } from "./styles";
+
 const alphabet = [
 	"A",
 	"B",
@@ -28,11 +31,24 @@ const alphabet = [
 ];
 
 function Letras() {
+	const [locked, setLocked] = useState(true);
+
+	function filterLetter(locked, letter) {
+		if (locked) {
+			return <LockedLetter onClick={unlockLetter}>{letter}</LockedLetter>;
+		} else {
+			return (
+				<UnlockedLetter onClick={unlockLetter}>{letter}</UnlockedLetter>
+			);
+		}
+	}
+
+	function unlockLetter() {
+		locked ? setLocked(false) : setLocked(true);
+	}
 	return (
 		<div style={{ backgroundColor: "purple" }} className="letters-content">
-			{alphabet.map((letter) => (
-				<div className="letter-box locked-letter">{letter}</div>
-			))}
+			{alphabet.map((letter) => filterLetter(locked, letter))}
 		</div>
 	);
 }

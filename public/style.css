@@ -51,6 +51,8 @@ body {
 .image {
 	max-width: 400px;
 	max-height: 470px;
+	height: 400px;
+	width: 470px;
 	background-color: yellow;
 }
 
@@ -60,36 +62,6 @@ body {
 
 	max-width: 1050px;
 	width: 100%;
-}
-
-.letter-box {
-	width: 40px;
-	height: 40px;
-	font-style: normal;
-	font-weight: 700;
-	font-size: 16px;
-	line-height: 19px;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	text-align: center;
-
-	border-radius: 3px;
-	margin: 5px;
-
-	cursor: pointer;
-}
-
-.locked-letter {
-	color: #798a9f;
-	background: #9faab5;
-	border: 1px solid #7aa7c7;
-}
-
-.unlocked-letter {
-	color: #39739d;
-	background: #e1ecf4;
-	border: 1px solid #7aa7c7;
 }
 
 .letters-content {
