@@ -35,16 +35,14 @@ function Letras() {
 
 	function filterLetter(locked, letter) {
 		if (locked) {
-			return <LockedLetter onClick={unlockLetter}>{letter}</LockedLetter>;
+			return <LockedLetter>{letter}</LockedLetter>;
 		} else {
-			return (
-				<UnlockedLetter onClick={unlockLetter}>{letter}</UnlockedLetter>
-			);
+			return <UnlockedLetter>{letter}</UnlockedLetter>;
 		}
 	}
 
 	function unlockLetter() {
-		locked ? setLocked(false) : setLocked(true);
+		setLocked(false);
 	}
 	return (
 		<div style={{ backgroundColor: "purple" }} className="letters-content">

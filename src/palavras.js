@@ -1,4 +1,4 @@
-const palavras = [
+export const palavras = [
 	"abacate",
 	"abacaxi",
 	"abelha",
