@@ -1,21 +1,15 @@
 import { useState } from "react";
-import palavras from "./palavras";
+import App from "./App.js";
+import palavras from "./palavras.js";
+import styled from "styled-components";
 
-function getRandomNumber(max) {
-	return Math.floor(Math.random() * max);
-}
-
-function Jogo() {
-	const [word, setWord] = useState("--------");
-
-	function chooseWord() {
-		const newWord = palavras[getRandomNumber(palavras.length)];
-		setWord(newWord);
-	}
+function Jogo({ word, image, chooseWord }) {
 	return (
-		<div className="game" style={{ backgroundColor: "brown" }}>
-			<div className="image"></div>
-			<div className="content" style={{ backgroundColor: "white" }}>
+		<div className="game">
+			<ForcaImg>
+				<img src={image} alt="" />
+			</ForcaImg>
+			<div className="content">
 				<div className="button" onClick={chooseWord}>
 					Escolher palavra
 				</div>
@@ -26,3 +20,18 @@ function Jogo() {
 }
 
 export default Jogo;
+
+const ForcaImg = styled.div`
+	/* max-width: 400px;
+	max-height: 470px; */
+	height: 400px;
+	width: 470px;
+	background-color: yellow;
+	overflow: hidden;
+
+	img {
+		width: 400px;
+		height: 466.67px;
+		object-fit: cover;
+	}
+`;

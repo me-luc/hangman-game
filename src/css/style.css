@@ -6,7 +6,7 @@ body {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	background-color: blue;
+	background-color: white;
 	font-family: "Roboto";
 	font-style: normal;
 }
@@ -49,29 +49,12 @@ body {
 	color: #000000;
 }
 
-.image {
-	max-width: 400px;
-	max-height: 470px;
-	height: 400px;
-	width: 470px;
-	background-color: yellow;
-}
-
 .game {
 	display: flex;
 	justify-content: space-between;
 
 	max-width: 1050px;
 	width: 100%;
-}
-
-.letters-content {
-	display: flex;
-	justify-content: center;
-	flex-wrap: wrap;
-
-	max-width: 690px;
-	width: 100vw;
 }
 
 .content {
