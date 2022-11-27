@@ -19,7 +19,7 @@ function getRandomNumber(max) {
 
 export default function App() {
 	console.log("RENDERING AGAIN");
-	const [word, setWord] = useState("--------");
+	const [answer, setAnswer] = useState("--------");
 	const imgArr = [forca0, forca1, forca2, forca3, forca4, forca5, forca6];
 	const [textColor, setTextColor] = useState("#000");
 	const [hangImg, setHangImg] = useState(forca0);
@@ -29,9 +29,9 @@ export default function App() {
 	const [errors, setErros] = useState(0);
 
 	function chooseWord() {
-		if (gameState || word === "--------") {
+		if (gameState || answer === "--------") {
 			const newPlayerWord = palavras[getRandomNumber(palavras.length)];
-			setWord(newPlayerWord.toUpperCase());
+			setAnswer(newPlayerWord.toUpperCase());
 			setPlayerWord(underlineWord(newPlayerWord.toUpperCase()));
 			setLettersPlayed([]);
 			setErros(0);
@@ -46,8 +46,8 @@ export default function App() {
 		newLetterPlayed.push(letter);
 		setLettersPlayed(newLetterPlayed);
 		let newPlayerWord = "";
-		if (word.includes(letter)) {
-			newPlayerWord = removeUnderlineChar(word, playerWord, letter);
+		if (answer.includes(letter)) {
+			newPlayerWord = removeUnderlineChar(answer, playerWord, letter);
 			setPlayerWord(newPlayerWord);
 		} else {
 			let count = errors + 1;
@@ -59,14 +59,14 @@ export default function App() {
 		//perder por qt de erros
 		if (errors === 5) {
 			setTextColor("#FF0000");
-			setPlayerWord(word);
+			setPlayerWord(answer);
 			setGameState(false);
 			setHangImg(forca6);
 			console.log("LOSE");
 			return;
 		}
 		//acertar palavra
-		if (newPlayerWord.replace(/ /g, "") === word) {
+		if (newPlayerWord.replace(/ /g, "") === answer) {
 			setTextColor("#27AE60");
 			setGameState(false);
 			console.log("WIN");
@@ -77,7 +77,7 @@ export default function App() {
 	}
 
 	function guessWord(guess) {
-		if (guess.toUpperCase() === word || guess === word) {
+		if (guess.toUpperCase() === answer || guess === answer) {
 			console.log("win");
 		} else {
 			console.log("ERROU!!!!!!!");
@@ -89,11 +89,12 @@ export default function App() {
 		<StyledPage>
 			<Jogo
 				word={playerWord}
+				answer={answer}
 				image={hangImg}
 				chooseWord={chooseWord}
 				gameState={gameState}
 				textColor={textColor}
-				key={word}
+				key={answer}
 			/>
 			<Letras
 				gameState={gameState}

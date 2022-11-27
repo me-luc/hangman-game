@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-function Jogo({ word, image, chooseWord, gameState, textColor }) {
+function Jogo({ word, answer, image, chooseWord, gameState, textColor }) {
 	return (
 		<GameContent>
 			<ForcaImg>
@@ -13,7 +13,7 @@ function Jogo({ word, image, chooseWord, gameState, textColor }) {
 				<Word
 					color={textColor}
 					data-test="word"
-					data-answer={gameState && `${word}`}>
+					data-answer={gameState && `${answer}`}>
 					{word}
 				</Word>
 			</WordContent>
