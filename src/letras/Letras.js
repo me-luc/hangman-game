@@ -45,7 +45,6 @@ function Letras({ gameState, chooseLetter, playerAlphabet }) {
 					letter={letter}
 					disabled={!gameState}
 					key={letter}
-					data-test="letter"
 				/>
 			))}
 		</StyledLetras>

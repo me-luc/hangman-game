@@ -1,27 +1,41 @@
 import styled from "styled-components";
 
-function Jogo({ word, image, chooseWord, gameState }) {
+function Jogo({ word, image, chooseWord, gameState, textColor }) {
 	return (
 		<GameContent>
 			<ForcaImg>
 				<img src={image} data-test="game-image" alt="" />
 			</ForcaImg>
-			<div className="content">
+			<WordContent>
 				<button data-test="choose-word" onClick={chooseWord}>
 					Escolher palavra
 				</button>
-				<div
-					className="word"
+				<Word
+					color={textColor}
 					data-test="word"
 					data-answer={gameState && `${word}`}>
 					{word}
-				</div>
-			</div>
+				</Word>
+			</WordContent>
 		</GameContent>
 	);
 }
 
 export default Jogo;
+
+const Word = styled.div`
+	font-family: "Noto Sans";
+	font-style: normal;
+	font-weight: 700;
+	font-size: 50px;
+	line-height: 68px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+
+	color: ${(props) => props.color};
+`;
 
 const ForcaImg = styled.div`
 	max-width: 600px;
@@ -59,4 +73,16 @@ const GameContent = styled.div`
 		border-radius: 8px;
 		cursor: pointer;
 	}
+`;
+
+const WordContent = styled.div`
+	max-width: 700px;
+	width: 700px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: space-between;
+
+	box-sizing: border-box;
+	padding: 40px 0;
 `;

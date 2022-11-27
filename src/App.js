@@ -11,114 +11,125 @@ import forca4 from "./assets/forca4.png";
 import forca5 from "./assets/forca5.png";
 import forca6 from "./assets/forca6.png";
 import "./css/style.css";
+import styled from "styled-components";
 
 function getRandomNumber(max) {
 	return Math.floor(Math.random() * max);
 }
 
-function App() {
-	console.log("hey its me starting");
+export default function App() {
+	console.log("RENDERING AGAIN");
 	const [word, setWord] = useState("--------");
 	const imgArr = [forca0, forca1, forca2, forca3, forca4, forca5, forca6];
+	const [textColor, setTextColor] = useState("#000");
 	const [hangImg, setHangImg] = useState(forca0);
 	const [gameState, setGameState] = useState(false);
 	const [playerWord, setPlayerWord] = useState("");
 	const [lettersPlayed, setLettersPlayed] = useState([]);
 	const [errors, setErros] = useState(0);
 
-	//CONDIÇÕES QUE PARAM O JOGO
-	if (errors === 6) {
-		setGameState(false);
-		setHangImg(forca6);
-	}
-
-	console.log("WORD SPLIT", playerWord.split(""));
-
-	if (playerWord.replace(/ /g, "") === word) {
-		setGameState(false);
-	}
-
 	function chooseWord() {
 		if (gameState || word === "--------") {
-			const newWord = palavras[getRandomNumber(palavras.length)];
-			setWord(newWord.toUpperCase());
-			setPlayerWord(underlineWord(newWord.toUpperCase()));
+			const newPlayerWord = palavras[getRandomNumber(palavras.length)];
+			setWord(newPlayerWord.toUpperCase());
+			setPlayerWord(underlineWord(newPlayerWord.toUpperCase()));
 			setLettersPlayed([]);
 			setErros(0);
-			console.log("REMOVER DEPOIS, RESPOSTA ->", newWord);
+			console.log("REMOVER DEPOIS, RESPOSTA ->", newPlayerWord);
 			setHangImg(forca0);
 			setGameState(true);
 		}
 	}
 
 	function chooseLetter(letter) {
-		let newLettersPlayed = [...lettersPlayed];
-		newLettersPlayed.push(letter);
-		setLettersPlayed(newLettersPlayed);
-
+		let newLetterPlayed = [...lettersPlayed];
+		newLetterPlayed.push(letter);
+		setLettersPlayed(newLetterPlayed);
+		let newPlayerWord = "";
 		if (word.includes(letter)) {
-			let newWord = removeUnderlineChar(word, playerWord, letter);
-			setPlayerWord(newWord);
-			console.log("if");
+			newPlayerWord = removeUnderlineChar(word, playerWord, letter);
+			setPlayerWord(newPlayerWord);
 		} else {
 			let count = errors + 1;
 			setErros(count);
 			setHangImg(imgArr[count]);
-			console.log("else");
 		}
-		console.log("outside");
+
+		//CONDIÇÕES QUE PARAM O JOGO
+		//perder por qt de erros
+		if (errors === 5) {
+			setTextColor("#FF0000");
+			setPlayerWord(word);
+			setGameState(false);
+			setHangImg(forca6);
+			console.log("LOSE");
+			return;
+		}
+		//acertar palavra
+		if (newPlayerWord.replace(/ /g, "") === word) {
+			setTextColor("#27AE60");
+			setGameState(false);
+			console.log("WIN");
+			return;
+		}
+
+		console.log("ERROR COUNT", errors);
 	}
 
 	function guessWord(guess) {
-		if (guess.toUpperCase === word) {
-			alert("win");
+		if (guess.toUpperCase() === word || guess === word) {
+			console.log("win");
 		} else {
 			console.log("ERROU!!!!!!!");
 			setHangImg(forca6);
 		}
-		console.log("guess", guess, "WORD", word);
 	}
 
 	return (
-		<div className="page">
+		<StyledPage>
 			<Jogo
 				word={playerWord}
 				image={hangImg}
 				chooseWord={chooseWord}
 				gameState={gameState}
+				textColor={textColor}
 				key={word}
 			/>
 			<Letras
 				gameState={gameState}
-				chooseLetter={(e) => chooseLetter(e, 100)}
+				chooseLetter={chooseLetter}
 				playerAlphabet={lettersPlayed}
 			/>
 			<Chute guessWord={guessWord} gameState={gameState} />
-		</div>
+		</StyledPage>
 	);
 }
 
-export default App;
+const StyledPage = styled.div`
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+`;
 
 function removeUnderlineChar(word, playerWord, letter) {
-	let newWord = playerWord.replace(/ /g, "").split("");
-	console.log(newWord);
+	let newPlayerWord = playerWord.replace(/ /g, "").split("");
 
-	for (let i = 0; i < newWord.length; i++) {
+	for (let i = 0; i < newPlayerWord.length; i++) {
 		if (word[i] === letter) {
-			newWord[i] = `${word[i]} `;
+			newPlayerWord[i] = `${word[i]} `;
 		} else {
-			newWord[i] = `${newWord[i]} `;
+			newPlayerWord[i] = `${newPlayerWord[i]} `;
 		}
 	}
-	return newWord.join("");
+	return newPlayerWord.join("");
 }
 
 function underlineWord(word) {
-	let newWord = word.split("");
+	let newPlayerWord = word.split("");
 	for (let i = 0; i < word.length; i++) {
-		newWord[i] = "_ ";
+		newPlayerWord[i] = "_ ";
 	}
 
-	return newWord.join("");
+	return newPlayerWord.join("");
 }

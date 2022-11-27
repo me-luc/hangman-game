@@ -1,12 +1,6 @@
 import styled from "styled-components";
 
-export default function Letra({
-	gameState,
-	playerAlphabet,
-	letter,
-	chooseLetter,
-	letterState,
-}) {
+export default function Letra({ letter, chooseLetter, letterState }) {
 	return (
 		<Letter
 			data-test="letter"
