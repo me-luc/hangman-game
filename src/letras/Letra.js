@@ -12,11 +12,7 @@ export default function Letra({
 			key={letter}
 			disabled={!letterState}
 			letterState={letterState}
-			onClick={() => {
-				if (letterState) {
-					chooseLetter(letter);
-				}
-			}}>
+			onClick={() => chooseLetter(letter)}>
 			{letter}
 		</Letter>
 	);

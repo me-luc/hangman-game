@@ -19,13 +19,13 @@ export default Jogo;
 const ForcaImg = styled.div`
 	/* max-width: 400px;
 	max-height: 470px; */
-	height: 400px;
-	width: 470px;
+	height: 600px;
+	width: 700px;
 	overflow: hidden;
+	background-color: blue;
 
 	img {
-		width: 400px;
-		height: 466.67px;
+		height: 100%;
 		object-fit: cover;
 	}
 `;

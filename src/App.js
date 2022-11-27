@@ -28,7 +28,8 @@ function App() {
 
 	//CONDIÇÕES QUE PARAM O JOGO
 	if (errors === 6) {
-		setGameState(false);
+		//setGameState(false);
+		setHangImg(forca6);
 	}
 
 	if (playerWord.split("") === word) {
@@ -63,6 +64,16 @@ function App() {
 		}
 	}
 
+	function guessWord(guess) {
+		if (guess.toUpperCase === word) {
+			alert("win");
+		} else {
+			console.log("ERROU!!!!!!!");
+			setHangImg(forca6);
+		}
+		console.log("guess", guess, "WORD", word);
+	}
+
 	return (
 		<div className="page">
 			<Jogo
@@ -77,7 +88,7 @@ function App() {
 				chooseLetter={chooseLetter}
 				playerAlphabet={lettersPlayed}
 			/>
-			<Chute />
+			<Chute guessWord={guessWord} gameState={gameState} />
 		</div>
 	);
 }

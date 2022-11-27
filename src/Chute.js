@@ -1,11 +1,15 @@
+import { useState } from "react";
 import styled from "styled-components";
 
-export default function Chute() {
+export default function Chute({ gameState, guessWord }) {
+	const [guess, setGuess] = useState("");
 	return (
 		<Styled>
 			<p>Já sei a palavra!</p>
-			<input type="text" />
-			<button>Chute</button>
+			<input type="text" onChange={(e) => setGuess(e.target.value)} />
+			<button disabled={!gameState} onClick={() => guessWord(guess)}>
+				Chute
+			</button>
 		</Styled>
 	);
 }
