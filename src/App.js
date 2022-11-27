@@ -2,6 +2,7 @@ import { useState } from "react";
 import Jogo from "./Jogo";
 import Letras from "./letras/Letras";
 import palavras from "./palavras.js";
+import Chute from "./Chute";
 import forca0 from "./assets/forca0.png";
 import forca1 from "./assets/forca1.png";
 import forca2 from "./assets/forca2.png";
@@ -16,6 +17,7 @@ function getRandomNumber(max) {
 }
 
 function App() {
+	console.log("hey its me starting");
 	const [word, setWord] = useState("--------");
 	const imgArr = [forca0, forca1, forca2, forca3, forca4, forca5, forca6];
 	const [hangImg, setHangImg] = useState(forca0);
@@ -24,8 +26,14 @@ function App() {
 	const [lettersPlayed, setLettersPlayed] = useState([]);
 	const [errors, setErros] = useState(0);
 
+	//CONDIÇÕES QUE PARAM O JOGO
 	if (errors === 6) {
 		setGameState(false);
+	}
+
+	if (playerWord.split("") === word) {
+		setGameState(false);
+		alert("FINISHED");
 	}
 
 	function chooseWord() {
@@ -48,8 +56,10 @@ function App() {
 			let newWord = removeUnderlineChar(word, playerWord, letter);
 			setPlayerWord(newWord);
 		} else {
-			setErros(errors + 1);
-			setHangImg(imgArr[errors]);
+			let count = errors + 1;
+			setErros(count);
+			setHangImg(imgArr[count]);
+			console.log(imgArr[errors]);
 		}
 	}
 
@@ -59,6 +69,7 @@ function App() {
 				word={playerWord}
 				image={hangImg}
 				chooseWord={chooseWord}
+				gameState={gameState}
 				key={word}
 			/>
 			<Letras
@@ -66,6 +77,7 @@ function App() {
 				chooseLetter={chooseLetter}
 				playerAlphabet={lettersPlayed}
 			/>
+			<Chute />
 		</div>
 	);
 }
@@ -73,12 +85,14 @@ function App() {
 export default App;
 
 function removeUnderlineChar(word, playerWord, letter) {
-	let newWord = playerWord.replace(" ", "").split("");
+	let newWord = playerWord.replace(/ /g, "").split("");
 	console.log(newWord);
 
 	for (let i = 0; i < newWord.length; i++) {
 		if (word[i] === letter) {
-			newWord[i] = ` ${word[i]} `;
+			newWord[i] = `${word[i]} `;
+		} else {
+			newWord[i] = `${newWord[i]} `;
 		}
 	}
 	return newWord.join("");

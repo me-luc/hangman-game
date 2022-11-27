@@ -1,21 +1,16 @@
-import { useState } from "react";
-import App from "./App.js";
-import palavras from "./palavras.js";
 import styled from "styled-components";
 
 function Jogo({ word, image, chooseWord }) {
 	return (
-		<div className="game">
+		<GameContent>
 			<ForcaImg>
 				<img src={image} alt="" />
 			</ForcaImg>
 			<div className="content">
-				<div className="button" onClick={chooseWord}>
-					Escolher palavra
-				</div>
+				<button onClick={chooseWord}>Escolher palavra</button>
 				<div className="word">{word}</div>
 			</div>
-		</div>
+		</GameContent>
 	);
 }
 
@@ -26,12 +21,36 @@ const ForcaImg = styled.div`
 	max-height: 470px; */
 	height: 400px;
 	width: 470px;
-	background-color: yellow;
 	overflow: hidden;
 
 	img {
 		width: 400px;
 		height: 466.67px;
 		object-fit: cover;
+	}
+`;
+
+const GameContent = styled.div`
+	display: flex;
+	justify-content: space-between;
+
+	max-width: 1050px;
+	width: 100%;
+
+	button {
+		width: 200px;
+		height: 60px;
+
+		font-weight: 700;
+		font-size: 20px;
+		line-height: 23px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+
+		color: #ffffff;
+		background: #27ae60;
+		border-radius: 8px;
+		cursor: pointer;
 	}
 `;
