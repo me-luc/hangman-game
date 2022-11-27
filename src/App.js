@@ -28,24 +28,27 @@ function App() {
 
 	//CONDIÇÕES QUE PARAM O JOGO
 	if (errors === 6) {
-		//setGameState(false);
+		setGameState(false);
 		setHangImg(forca6);
 	}
 
-	if (playerWord.split("") === word) {
+	console.log("WORD SPLIT", playerWord.split(""));
+
+	if (playerWord.replace(/ /g, "") === word) {
 		setGameState(false);
-		alert("FINISHED");
 	}
 
 	function chooseWord() {
-		const newWord = palavras[getRandomNumber(palavras.length)];
-		setWord(newWord.toUpperCase());
-		setPlayerWord(underlineWord(newWord.toUpperCase()));
-		setLettersPlayed([]);
-		setErros(0);
-		console.log("REMOVER DEPOIS, RESPOSTA ->", newWord);
-		setHangImg(forca0);
-		setGameState(true);
+		if (gameState || word === "--------") {
+			const newWord = palavras[getRandomNumber(palavras.length)];
+			setWord(newWord.toUpperCase());
+			setPlayerWord(underlineWord(newWord.toUpperCase()));
+			setLettersPlayed([]);
+			setErros(0);
+			console.log("REMOVER DEPOIS, RESPOSTA ->", newWord);
+			setHangImg(forca0);
+			setGameState(true);
+		}
 	}
 
 	function chooseLetter(letter) {
@@ -56,12 +59,14 @@ function App() {
 		if (word.includes(letter)) {
 			let newWord = removeUnderlineChar(word, playerWord, letter);
 			setPlayerWord(newWord);
+			console.log("if");
 		} else {
 			let count = errors + 1;
 			setErros(count);
 			setHangImg(imgArr[count]);
-			console.log(imgArr[errors]);
+			console.log("else");
 		}
+		console.log("outside");
 	}
 
 	function guessWord(guess) {
@@ -85,7 +90,7 @@ function App() {
 			/>
 			<Letras
 				gameState={gameState}
-				chooseLetter={chooseLetter}
+				chooseLetter={(e) => chooseLetter(e, 100)}
 				playerAlphabet={lettersPlayed}
 			/>
 			<Chute guessWord={guessWord} gameState={gameState} />

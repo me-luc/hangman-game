@@ -10,6 +10,7 @@ export default function Chute({ gameState, guessWord }) {
 				type="text"
 				onChange={(e) => setGuess(e.target.value)}
 				data-test="guess-input"
+				disabled={!gameState}
 			/>
 			<button
 				disabled={!gameState}

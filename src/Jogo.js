@@ -13,7 +13,7 @@ function Jogo({ word, image, chooseWord, gameState }) {
 				<div
 					className="word"
 					data-test="word"
-					data-answer={gameState && "quarentena"}>
+					data-answer={gameState && `${word}`}>
 					{word}
 				</div>
 			</div>
@@ -24,12 +24,11 @@ function Jogo({ word, image, chooseWord, gameState }) {
 export default Jogo;
 
 const ForcaImg = styled.div`
-	/* max-width: 400px;
-	max-height: 470px; */
+	max-width: 600px;
+	max-height: 700px;
 	height: 600px;
 	width: 700px;
 	overflow: hidden;
-	background-color: blue;
 
 	img {
 		height: 100%;
