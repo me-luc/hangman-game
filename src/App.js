@@ -29,16 +29,15 @@ export default function App() {
 	const [errors, setErros] = useState(0);
 
 	function chooseWord() {
-		if (gameState || answer === "--------") {
-			const newPlayerWord = palavras[getRandomNumber(palavras.length)];
-			setAnswer(newPlayerWord.toUpperCase());
-			setPlayerWord(underlineWord(newPlayerWord.toUpperCase()));
-			setLettersPlayed([]);
-			setErros(0);
-			console.log("REMOVER DEPOIS, RESPOSTA ->", newPlayerWord);
-			setHangImg(forca0);
-			setGameState(true);
-		}
+		const newPlayerWord = palavras[getRandomNumber(palavras.length)];
+		setTextColor("#000");
+		setAnswer(newPlayerWord.toUpperCase());
+		setPlayerWord(underlineWord(newPlayerWord.toUpperCase()));
+		setLettersPlayed([]);
+		setErros(0);
+		console.log("REMOVER DEPOIS, RESPOSTA ->", newPlayerWord);
+		setHangImg(forca0);
+		setGameState(true);
 	}
 
 	function chooseLetter(letter) {
