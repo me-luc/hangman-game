@@ -78,10 +78,16 @@ export default function App() {
 
 	function guessWord(guess) {
 		if (guess.toUpperCase() === answer || guess === answer) {
-			console.log("win");
+			setTextColor("#27AE60");
+			setPlayerWord(answer);
+			setGameState(false);
+			return;
 		} else {
-			console.log("ERROU!!!!!!!");
+			setTextColor("#FF0000");
+			setPlayerWord(answer);
+			setGameState(false);
 			setHangImg(forca6);
+			return;
 		}
 	}
 
