@@ -9,6 +9,7 @@ export default function Letra({
 }) {
 	return (
 		<Letter
+			data-test="letter"
 			key={letter}
 			disabled={!letterState}
 			letterState={letterState}

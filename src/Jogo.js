@@ -1,14 +1,21 @@
 import styled from "styled-components";
 
-function Jogo({ word, image, chooseWord }) {
+function Jogo({ word, image, chooseWord, gameState }) {
 	return (
 		<GameContent>
 			<ForcaImg>
-				<img src={image} alt="" />
+				<img src={image} data-test="game-image" alt="" />
 			</ForcaImg>
 			<div className="content">
-				<button onClick={chooseWord}>Escolher palavra</button>
-				<div className="word">{word}</div>
+				<button data-test="choose-word" onClick={chooseWord}>
+					Escolher palavra
+				</button>
+				<div
+					className="word"
+					data-test="word"
+					data-answer={gameState && "quarentena"}>
+					{word}
+				</div>
 			</div>
 		</GameContent>
 	);

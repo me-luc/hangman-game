@@ -6,8 +6,15 @@ export default function Chute({ gameState, guessWord }) {
 	return (
 		<Styled>
 			<p>Já sei a palavra!</p>
-			<input type="text" onChange={(e) => setGuess(e.target.value)} />
-			<button disabled={!gameState} onClick={() => guessWord(guess)}>
+			<input
+				type="text"
+				onChange={(e) => setGuess(e.target.value)}
+				data-test="guess-input"
+			/>
+			<button
+				disabled={!gameState}
+				onClick={() => guessWord(guess)}
+				data-test="guess-button">
 				Chute
 			</button>
 		</Styled>
