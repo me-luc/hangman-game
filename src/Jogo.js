@@ -13,7 +13,7 @@ function Jogo({ word, answer, image, chooseWord, gameState, textColor }) {
 				<Word
 					color={textColor}
 					data-test="word"
-					data-answer={gameState && `${answer}`}>
+					data-answer={answer && `${answer}`}>
 					{word}
 				</Word>
 			</WordContent>
